@@ -1,0 +1,49 @@
+/**
+ * @format
+ */
+import 'react-native';
+import React from 'react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/es/integration/react';
+import mockAsyncStorage from '@react-native-community/async-storage/jest/async-storage-mock';
+import 'react-native-gesture-handler/jestSetup';
+
+// Note: test renderer must be required after react-native.
+import renderer, {act} from 'react-test-renderer';
+
+import RootNavigation from '../app/App';
+
+import configureStore from '../app/store';
+
+const {store, persistor} = configureStore();
+
+jest.mock('@react-native-community/async-storage', () => mockAsyncStorage);
+
+jest.mock('react-native', () => ({
+  UIManager: {
+    RCTView: () => ({
+      directEventTypes: {},
+    }),
+  },
+  KeyboardObserver: {},
+  RNGestureHandlerModule: {
+    attachGestureHandler: jest.fn(),
+    createGestureHandler: jest.fn(),
+    dropGestureHandler: jest.fn(),
+    updateGestureHandler: jest.fn(),
+    State: {},
+    Directions: {},
+  },
+}));
+
+it('renders correctly', async () => {
+  await act(async () => {
+    renderer.create(
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <RootNavigation />
+        </PersistGate>
+      </Provider>,
+    );
+  });
+});

@@ -1,0 +1,94 @@
+{
+  "name": "AwesomeTSProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "pretty": "prettier --write \"app/**/*.ts\"",
+    "lint:fix": "yarn pretty && yarn lint --fix",
+    "update:pods": "npx pod-install ios",
+    "postinstall": "yarn run update:pods",
+    "ios:stop": "xcrun simctl terminate booted org.reactjs.native.example",
+    "android:stop": "adb shell am force-stop com.awesometsproject",
+    "android:log:clear": "adb logcat -c",
+    "android:clean": "cd android && ./gradlew clean && cd ..",
+    "ios:shot": "xcrun simctl io booted screenshot ScreenShot.png",
+    "ios:video": "xcrun simctl io booted recordVideo ScreenVideo.mov",
+    "clear_babel_loader": "rimraf ./node_modules/.cache/babel-loader",
+    "rsp": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:9090 tcp:9090 && adb reverse tcp:7007 tcp:7007",
+    "m": "adb shell input keyevent 82",
+    "r": "adb shell input keyevent 82 20 66 66"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
+    "axios": "^0.20.0",
+    "react": "16.13.1",
+    "react-native": "0.63.2",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-paper": "^4.1.0",
+    "react-native-reanimated": "^1.13.0",
+    "react-native-render-html": "^4.2.4",
+    "react-native-safe-area-context": "^3.1.7",
+    "react-native-screens": "^2.13.0",
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-webview": "^10.10.2",
+    "react-navigation-shared-element": "^2.3.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@types/jest": "^25.2.3",
+    "@types/react-native": "^0.63.2",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-test-renderer": "^16.9.2",
+    "@types/redux-logger": "^3.0.8",
+    "@types/redux-persist": "^4.3.1",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.5.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^25.1.0",
+    "jest-transform-stub": "^2.0.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.0.4",
+    "react-test-renderer": "16.13.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.4",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|@react-native-community/async-storage|react-native-paper)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "transform": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    }
+  }
+}
